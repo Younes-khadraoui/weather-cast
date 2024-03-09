@@ -26,6 +26,12 @@ interface Weather {
   forecast: {
     forecastday: {
       date: string;
+      day: {
+        avgtemp_c: number;
+        condition: {
+          icon: string;
+        };
+      };
       astro: {
         sunrise: string;
         sunset: string;
@@ -44,7 +50,7 @@ interface Weather {
 
 export const fetchWeather = async () => {
   const res = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=London&days=1&aqi=no&alerts=no`
+    `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=London&days=5&aqi=no&alerts=no`
   );
   return (await res.json()) as Weather;
 };
