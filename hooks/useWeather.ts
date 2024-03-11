@@ -1,6 +1,6 @@
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_URL = "https://api.weatherapi.com/v1/";
 
-interface Weather {
+export interface Weather {
   location: {
     name: string;
     region: string;
@@ -48,9 +48,32 @@ interface Weather {
   };
 }
 
-export const fetchWeather = async () => {
-  const res = await fetch(
-    `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=London&days=5&aqi=no&alerts=no`
-  );
-  return (await res.json()) as Weather;
+export const fetchWeather = async ({
+  search = "London",
+}: {
+  search?: string;
+}): Promise<Weather> => {
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
+  if (!API_KEY) {
+    throw new Error("API key is not defined.");
+  }
+
+  const apiUrl = "https://api.weatherapi.com/v1/";
+
+  let res: Response;
+  try {
+    res = await fetch(
+      `${apiUrl}forecast.json?key=${API_KEY}&q=${search}&days=5&aqi=no&alerts=no`
+    );
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    throw new Error("Failed to fetch weather data");
+  }
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch weather data");
+  }
+
+  return res.json();
 };
