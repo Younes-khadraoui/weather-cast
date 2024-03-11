@@ -14,7 +14,6 @@ const Navbar = () => {
       router.push(href);
     }
   };
-
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
       const searchValue = inputRef.current?.value;
@@ -24,15 +23,31 @@ const Navbar = () => {
       }
     }
   };
+  const findLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const href = `/?lat=${latitude}&lon=${longitude}`;
+      router.push(href);
+    });
+  };
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 justify-between items-center p-4">
-      <div className="flex gap-2 items-center">
+      <div
+        className="flex gap-2 items-center cursor-pointer"
+        onClick={() => {
+          router.push("/");
+        }}
+      >
         <SunMoonIcon size={40} />
-        <h1 className="text-2xl">WeatherCast</h1>
+        <h1 className="text-2xl font-bold">WeatherCast</h1>
       </div>
       <div className="flex justify-end lg:order-3">
-        <button className="bg-[#91A6F0] text-black rounded-lg p-2 flex gap-2">
+        <button
+          className="bg-[#91A6F0] text-black rounded-lg p-2 flex gap-2"
+          onClick={findLocation}
+        >
           <LocateIcon size={24} />
           <p>Current Location</p>
         </button>
@@ -47,7 +62,7 @@ const Navbar = () => {
           <input
             ref={inputRef}
             placeholder="Search city"
-            className="bg-transparent p-2  active:outline-none focus:outline-none "
+            className="bg-transparent p-2 w-full active:outline-none focus:outline-none "
             type="text"
             onKeyDown={handleKeyDown}
           />

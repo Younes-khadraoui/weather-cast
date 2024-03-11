@@ -48,9 +48,13 @@ export interface Weather {
 
 export const fetchWeather = async ({
   search = "London",
+  lat,
+  lon,
 }: {
   search?: string;
-}): Promise<Weather> => {
+  lat?: number;
+  lon?: number;
+}): Promise<Weather | any> => {
   const API_KEY = process.env.NEXT_API_KEY;
 
   if (!API_KEY) {
@@ -61,15 +65,15 @@ export const fetchWeather = async ({
 
   let res: Response;
   try {
-    res = await fetch(
-      `${apiUrl}forecast.json?key=${API_KEY}&q=${search}&days=5&aqi=no&alerts=no`
-    );
+    if (lat && lon)
+      res = await fetch(
+        `${apiUrl}forecast.json?key=${API_KEY}&q=${lat},${lon}&days=5&aqi=no&alerts=no`
+      );
+    else
+      res = await fetch(
+        `${apiUrl}forecast.json?key=${API_KEY}&q=${search}&days=5&aqi=no&alerts=no&lat=${lat}&lon=${lon}`
+      );
   } catch (error) {
-    console.error("Error fetching weather data:", error);
-    throw new Error("Failed to fetch weather data");
-  }
-
-  if (!res.ok) {
     throw new Error("Failed to fetch weather data");
   }
 
