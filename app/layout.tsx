@@ -14,17 +14,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  props,
 }: Readonly<{
   children: React.ReactNode;
-  props: {
-    search: string;
-  };
 }>) {
-  const setSearch = (search: string) => {
-    props.search = search;
-    return search;
-  };
   return (
     <html lang="en">
       <body className={inter.className}>
