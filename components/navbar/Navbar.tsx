@@ -1,24 +1,26 @@
 "use client";
 import React, { useRef } from "react";
 import { SearchIcon, LocateIcon, SunMoonIcon } from "lucide-react";
-import { useSearch } from "@/app/context/SearchContext";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const { setSearch } = useSearch();
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const handleSearchIconClick = () => {
     const searchValue = inputRef.current?.value;
+    const href = `/?search=${searchValue}`;
     if (searchValue) {
-      setSearch(searchValue);
+      router.push(href);
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
       const searchValue = inputRef.current?.value;
+      const href = `/?search=${searchValue}`;
       if (searchValue) {
-        setSearch(searchValue);
+        router.push(href);
       }
     }
   };

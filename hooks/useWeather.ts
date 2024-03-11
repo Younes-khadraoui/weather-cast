@@ -1,5 +1,3 @@
-const API_URL = "https://api.weatherapi.com/v1/";
-
 export interface Weather {
   location: {
     name: string;
@@ -53,7 +51,7 @@ export const fetchWeather = async ({
 }: {
   search?: string;
 }): Promise<Weather> => {
-  const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+  const API_KEY = process.env.NEXT_API_KEY;
 
   if (!API_KEY) {
     throw new Error("API key is not defined.");

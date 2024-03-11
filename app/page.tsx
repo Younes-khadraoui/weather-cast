@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import {
   Calendar,
@@ -11,19 +10,14 @@ import {
   HeartHandshakeIcon,
   Eye,
 } from "lucide-react";
-import { Weather, fetchWeather } from "@/hooks/useWeather";
-import { useSearch } from "./context/SearchContext";
-import { useEffect, useState } from "react";
+import { fetchWeather } from "@/hooks/useWeather";
 
-export default function Home() {
-  const { search } = useSearch();
-  const [data, setData] = useState<Weather | null>(null);
-  useEffect(() => {
-    (async () => {
-      const res = await fetchWeather({ search: search || "london" });
-      setData(res);
-    })();
-  }, [search]);
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { search: string };
+}) {
+  const data = await fetchWeather({ search: searchParams.search || "london" });
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
