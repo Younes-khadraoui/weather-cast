@@ -40,7 +40,9 @@ const Navbar = () => {
           router.push("/");
         }}
       >
-        <SunMoonIcon size={40} />
+        <div className="w-auto">
+          <SunMoonIcon size={40} />
+        </div>
         <h1 className="text-2xl font-bold">WeatherCast</h1>
       </div>
       <div className="flex justify-end lg:order-3">
