@@ -33,7 +33,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 justify-between items-center p-4">
+    <div className="grid grid-cols-2 lg:grid-cols-3 justify-between items-center p-4  f w-full ">
       <div
         className="flex gap-2 items-center cursor-pointer"
         onClick={() => {
@@ -43,7 +43,7 @@ const Navbar = () => {
         <div className="w-auto">
           <SunMoonIcon size={40} />
         </div>
-        <h1 className="text-2xl font-bold">WeatherCast</h1>
+        <h1 className="text-xl sm:text-3xl font-bold">WeatherCast</h1>
       </div>
       <div className="flex justify-end lg:order-3">
         <button
@@ -51,7 +51,7 @@ const Navbar = () => {
           onClick={findLocation}
         >
           <LocateIcon size={24} />
-          <p>Current Location</p>
+          <p className="text-md sm:text-lg">Current Location</p>
         </button>
       </div>
       <div className="flex justify-center col-span-2 p-4 lg:col-span-1 lg:order-1 ">
