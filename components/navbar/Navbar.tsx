@@ -51,7 +51,7 @@ const Navbar = () => {
           onClick={findLocation}
         >
           <LocateIcon size={24} />
-          <p className="text-md sm:text-lg">Current Location</p>
+          <p className="text-sm sm:text-lg">Current Location</p>
         </button>
       </div>
       <div className="flex justify-center col-span-2 p-4 lg:col-span-1 lg:order-1 ">

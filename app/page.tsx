@@ -42,7 +42,7 @@ export default async function Home({
               alt="Weather icon"
               width={120}
               height={60}
-              className="w-auto"
+              className="w-20"
             />
           </div>
           <p className="font-semibold text-lg opacity-80">
@@ -175,7 +175,6 @@ export default async function Home({
                     alt="Weather icon"
                     width={80}
                     height={60}
-                    className="w-auto"
                   />
                   <p className="font-semibold text-lg sm:text-xl text-center opacity-80">
                     {hour.temp_c}°C
@@ -191,13 +190,13 @@ export default async function Home({
           <div className="mx-2 sm:mx-10 bg-[#1E1E1E] rounded-lg  py-4">
             {data?.forecast.forecastday.map((day: any, index: any) => (
               <div className="flex items-center justify-around" key={index}>
-                <div className="flex items-center py-2">
+                <div className="flex gap-2 items-center py-2">
                   <Image
                     src={`https:${day.day.condition.icon}`}
                     alt="Weather icon"
                     width={80}
                     height={60}
-                    className="w-auto"
+                    className="w-14 sm:w-auto"
                   />
                   <p className="font-semibold text-xl sm:text-2xl text-center opacity-80">
                     {day.day.avgtemp_c}°c
